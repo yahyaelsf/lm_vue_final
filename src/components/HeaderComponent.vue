@@ -1,8 +1,13 @@
 
 
-<script>
-export default {
+<script setup>
+import { useUserStore } from "../stores/user";
+import router from '../router';
+const user = useUserStore();
 
+const logout = ()=>{
+    user.setUser(null);
+    router.push('/login')
 }
 </script>
 <template>
@@ -100,10 +105,14 @@ export default {
                         <a href="#" class="text-gray-200 hover:text-white transition">About us</a>
                         <a href="#" class="text-gray-200 hover:text-white transition">Contact us</a>
                     </div>
-                    <div>
+                     <template v-if="user.user">
+                        <a @click.prevent="logout()" href="/logout" class="text-gray-200 hover:text-white transition">logout</a>
+                    </template>
+                    <div v-else>
                         <router-link to="/login" class="text-gray-200 hover:text-white transition">Login</router-link>/
                         <router-link to="/register" class="text-gray-200 hover:text-white transition">register</router-link>
                     </div>
+                   
                 </div>
             </div>
         </nav>

@@ -77,15 +77,6 @@ import router from '../router';
 const name = ref("");
 const email = ref("");
 const password = ref("");
-    const checkUser = ()=>{
-      let userInfo = localStorage.getItem("user-info")
-      if(userInfo){
-        router.push({'path' : '/'});
-      }
-    }
-    onMounted(() => {
-        checkUser()
-    })
     const registerUser = () => {
     axios.post("http://localhost:3000/users", {
         name: name.value,

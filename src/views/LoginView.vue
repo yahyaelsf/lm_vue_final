@@ -58,25 +58,20 @@
 
 <script setup>
 import router from '../router';
-import {ref , onMounted} from 'vue';
-import axios from 'axios';
+import {ref} from 'vue';
+import { useUserStore } from '../stores/user';
+const user = useUserStore();
 const email = ref("");
 const password = ref("");
-const checkUser = () => {
-    let userInfo = localStorage.getItem("user-info")
-    if (userInfo) {
-        router.push({ 'path': '/' });
-    }
-}
-onMounted(() => {
-    checkUser()
-})
-
 const loginUser = ()=>{
-    axios.get(`http://localhost:3000/users?email=${email.value}&password=${password.value}`)
+    axios.post('/users',{
+        email:email.value,
+        password:password.value
+    })
     .then(function(res){
         console.log(res.data);
-        localStorage.setItem("user-info",JSON.stringify(res.data));
+        user.setUser(res.data)
+        console.log(user.user)
         router.push({'path':'/'})
     }).catch(function(err){
         alert("Error in login")

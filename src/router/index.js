@@ -3,6 +3,9 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import ShopView from '../views/ShopView.vue';
+import CheckoutView from '../views/CheckoutView.vue'
+import { useUserStore } from '../stores/user';
+import NotFoundView from '../views/NotFoundView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -35,6 +38,19 @@ const router = createRouter({
       name: 'Shop',
       component: ShopView
     },
+     {
+      path: '/checkout',
+      name: 'Checkout',
+      component: CheckoutView,
+      meta:{
+        Auth:true
+      }
+    },
+     {
+      path: '/:path(.*)*',
+      name: 'NotFound',
+      component: NotFoundView,
+    },
     // {
     //   path: '/about',
     //   name: 'about',
@@ -49,5 +65,12 @@ let defaultTitle = "Final Project";
 router.afterEach((to)=>{
   document.title = to.meta.title || defaultTitle
 })
+router.beforeEach((to,from,next)=>{
+  const user = useUserStore();
+  if(!user.user && to.meta.Auth){
+    router.push('/login')
+  }
+  next()
+});
 
 export default router
