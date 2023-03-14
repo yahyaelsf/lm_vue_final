@@ -1,16 +1,29 @@
 <script setup>
+import { onBeforeMount, onMounted, ref } from 'vue';
 import {RouterView} from 'vue-router'
 import { useUserStore } from './stores/user';
+const lang = ref("")
+onBeforeMount(e => {
+    getLocale()
+})
 
+const getLocale = () => {
+    lang.value = localStorage.getItem("locale")
+}
+ 
 </script>
 
 <template>
-    <header-tag/>
-    <router-view></router-view>
-   <footer-tag/>
+   <div :class="{ rtl : lang == 'ar'}">
+     <header-tag/>
+        <router-view></router-view>
+       <footer-tag/>
+   </div>
 </template>
 
-<style scoped>
-
+<style>
+body .rtl {
+    direction: rtl;
+}
 
 </style>

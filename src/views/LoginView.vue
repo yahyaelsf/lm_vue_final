@@ -72,6 +72,7 @@ const loginUser = ()=>{
         console.log(res.data);
         user.setUser(res.data)
         console.log(user.user)
+        toastr.success('logined Successfully')
         router.push({'path':'/'})
     }).catch(function(err){
         alert("Error in login")

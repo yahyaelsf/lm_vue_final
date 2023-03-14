@@ -1,0 +1,12 @@
+{
+    "ar":{
+        "products" : "المنتجات",
+        "home" : "الصفحة الرئيسية",
+        "shop" : "تسوق"
+    },
+    "en":{
+        "products" : "Products",
+        "home" : "Home",
+        "shop" : "Shop"
+    }
+}

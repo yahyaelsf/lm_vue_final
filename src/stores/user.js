@@ -16,6 +16,7 @@ export const useUserStore = defineStore('user', () => {
       porduct_id : id,
       user_id : user.value.id
     }).then(res =>{
+      toastr.success("product addedd Successfully to cart")
       getCart()
     })
   }

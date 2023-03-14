@@ -7,6 +7,8 @@ import CheckoutView from '../views/CheckoutView.vue'
 import { useUserStore } from '../stores/user';
 import NotFoundView from '../views/NotFoundView.vue';
 import CartView from '../views/CartView.vue'
+import AccountView from '../views/AccountView.vue'
+import WishlistView from '../views/WishlistView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -43,6 +45,16 @@ const router = createRouter({
       path: '/cart',
       name: 'Cart',
       component: CartView
+    },
+     {
+      path: '/account',
+      name: 'Account',
+      component: AccountView
+    },
+    {
+      path: '/wishlist',
+      name: 'Wishlist',
+      component: WishlistView
     },
      {
       path: '/checkout',
