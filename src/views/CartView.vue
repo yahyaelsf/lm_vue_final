@@ -18,15 +18,16 @@
                 <div v-for="item in products" :key="item"
                  class="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
                     <div class="w-28">
-                        <img :src="item.image" alt="product 6" class="w-full">
+                        <img :src="item[0].image" alt="product 6" class="w-full">
                     </div>
                     <div class="w-1/3">
                         <h2 class="text-gray-800 text-xl font-medium uppercase">
-                            {{ item.name }}</h2>
+                            {{ item[0].name }}</h2>
                     </div>
-                    <div class="text-primary text-lg font-semibold">${{ item.price }}</div>
+                    <div class="text-primary text-lg font-semibold">${{ item[0].price }}</div>
                     <div class="text-gray-600 cursor-pointer hover:text-primary">
-                        <i class="fa-solid fa-trash"></i>
+                        <i @click="deleteItem(item[0].id)"
+                         class="fa-solid fa-trash"></i>
                     </div>
                 </div>
             </div>
@@ -39,30 +40,42 @@
 </template>
 
 <script setup>
-import { ref , onMounted } from "vue";
+import axios from "axios";
+import { ref , onMounted , computed } from "vue";
 import { useUserStore } from "../stores/user";
 const user = useUserStore();
 const products = ref({});
+const image = ref("")
 onMounted(e => {
     getProducts()
 })
  const getProducts = ()=> {
     axios.get('/products').then(res => {
-        products.value = res.data;
-        console.log(res.data);
+        cartProduct(res.data)
     })
  }
 
- const cartProduct = () => {
+const cartProduct = (items) => {
+    let elements = {};
     user.cart.forEach(element => {
-        products.value = products.value.filters(el =>{
-            el.id = element.porduct_id
+        elements[element.id] = items.filter(el => {
+            return el.id == element.porduct_id
         })
     });
-    
- }
+    products.value = elements;
 
-
+}
+const deleteItem = (id) => {
+    // console.log(products.value[id][0].id);
+    delete products.value[id]
+    user.deleteFromCart(id);
+   
+}
+let formdata = new FormData();
+// formdata.append('_method','put')
+formdata.append('image', image.value)
+formdata.append('name', image.value)
+acios.post('',formdata)
 </script>
 
 <style>

@@ -14,10 +14,11 @@ const logout = ()=>{
 }
 const chanegLang = (e) =>{
 lang.value = e.$i18n.locale
+user.setLang(e.$i18n.locale)
 localStorage.setItem("locale",e.$i18n.locale)
 }
 onMounted( e=> {
-    lang.value = localStorage.getItem("locale") ?? "en"
+    lang.value =user.lang
 })
 
 </script>
@@ -78,7 +79,7 @@ onMounted( e=> {
                     <span class="text-white">
                         <i class="fa-solid fa-bars"></i>
                     </span>
-                    <span class="capitalize ml-2 text-white">All Categories</span>
+                    <span class="capitalize ml-2 text-white">{{ $t('all-category') }}</span>
 
                     <!-- dropdown -->
                     <div
@@ -114,8 +115,8 @@ onMounted( e=> {
                     <div class="flex items-center space-x-6 capitalize">
                         <router-link to="/" class="text-gray-200 hover:text-white transition">{{ $t('home') }}</router-link>
                         <router-link to="/shop" class="text-gray-200 hover:text-white transition">{{ $t('shop') }}</router-link>
-                        <a href="#" class="text-gray-200 hover:text-white transition">About us</a>
-                        <a href="#" class="text-gray-200 hover:text-white transition">Contact us</a>
+                        <a href="#" class="text-gray-200 hover:text-white transition">{{ $t('about-us') }}</a>
+                        <a href="#" class="text-gray-200 hover:text-white transition">{{ $t('contact-us') }}</a>
                     </div>
                     <div>
                         
@@ -141,4 +142,6 @@ onMounted( e=> {
 
 
 
-<style></style>
+<style>
+
+</style>

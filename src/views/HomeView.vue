@@ -1,6 +1,9 @@
 <template>
     <!-- banner -->
-          <div class="bg-cover bg-no-repeat bg-center py-36" style="background-image: url('../src/assets/images/banner-bg.jpg');">
+          <div class="bg-cover bg-no-repeat bg-center py-36"
+           style="background-image: url('../src/assets/images/banner-bg.jpg');"
+            :class="{ reverce: user.lang == 'ar' }"
+           >
               <div class="container">
                   <h1 class="text-6xl text-gray-800 font-medium mb-4 capitalize">
                       best collection for <br> home decoration
@@ -602,12 +605,16 @@
           <!-- ./product -->
 </template>
 
-<script>
-export default {
-
-}
+<script setup>
+import { useUserStore } from "../stores/user";
+const user = useUserStore();
 </script>
 
 <style>
-
+.reverce{
+   transform: scaleX(-1);
+}
+.reverce>div{
+    transform: scaleX(-1);
+}
 </style>

@@ -2,11 +2,17 @@
     "ar":{
         "products" : "المنتجات",
         "home" : "الصفحة الرئيسية",
-        "shop" : "تسوق"
+        "shop" : "تسوق",
+        "all-category" : "جميع التصنيفات",
+        "contact-us" : "تواصل معنا",
+        "about-us" : "عن المتجر"
     },
     "en":{
         "products" : "Products",
         "home" : "Home",
-        "shop" : "Shop"
+        "shop" : "Shop",
+        "all-category" : "All Categories",
+        "contact-us" : "Contact us",
+        "about-us" : "About us"
     }
 }
